@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\Support\Facades\Request;
+use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
 class LoginController extends Controller
 {
@@ -36,5 +40,26 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'email' => 'require|email',
+            'password' => 'require',
+        ]);
+
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if(auth()->user()->roles_id == 1 ){
+                return redirect()->route('admin.home');
+            } else {
+                return redirect()->route('home');
+            }
+        } else {
+            return redirect()->route('login')->with('email', 'Email-Address And Password Are Wrong.');
+        }
     }
 }
