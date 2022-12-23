@@ -318,6 +318,11 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Pasien',
+            'url'         => 'admin/pasiens',
+            'icon'        => 'fas fa-fw fa-user',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
