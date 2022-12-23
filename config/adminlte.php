@@ -321,7 +321,14 @@ return [
         [
             'text'        => 'Pasien',
             'url'         => 'admin/pasiens',
-            'icon'        => 'fas fa-fw fa-user',
+            'icon'        => 'fas fa-fw fa-users',
+            'can'         => 'isAdmin',
+        ],
+        [
+            'text'        => 'Dokter',
+            'url'         => 'admin/dokters',
+            'icon'        => 'fas fa-fw fa-user-md', 
+            'can'         => 'isAdmin',
         ],
         ['header' => 'account_settings'],
         [

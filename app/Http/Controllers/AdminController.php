@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasien;
+use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,4 +26,12 @@ class AdminController extends Controller
         $pasiens = Pasien::all();
         return view('pasien',compact('user','pasiens'));
     }
+
+    public function dokters()
+    {
+        $user = Auth::user();
+        $dokters = Dokter::all();
+        return view('dokter',compact('user','dokters'));
+    }
+
 }
