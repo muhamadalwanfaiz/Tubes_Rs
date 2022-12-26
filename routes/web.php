@@ -30,4 +30,6 @@ Route::get('admin/home', [\App\Http\Controllers\AdminController::class, 'index']
 
 Route::get('admin/pasiens', [App\Http\Controllers\AdminController::class, 'pasiens'])->name('admin.pasiens')->middleware('is_admin');
 
+Route::post('admin/pasien', [App\Http\Controllers\AdminController::class, 'submit_pasien'])->name('admin.pasien.submit')->middleware('is_admin');
+
 Route::get('admin/dokters', [App\Http\Controllers\AdminController::class, 'dokters'])->name('admin.dokters')->middleware('is_admin');
