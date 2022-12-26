@@ -32,4 +32,8 @@ Route::get('admin/pasiens', [App\Http\Controllers\AdminController::class, 'pasie
 
 Route::post('admin/pasien', [App\Http\Controllers\AdminController::class, 'submit_pasien'])->name('admin.pasien.submit')->middleware('is_admin');
 
+Route::patch('admin/pasiens/update', [App\Http\Controllers\AdminController::class, 'update_pasien'])->name('admin.pasien.update')->middleware('is_admin');
+
+Route::get('/admin/ajaxadmin/dataPasien/{id}', [App\Http\Controllers\AdminController::class, 'getDataPasien']);
+
 Route::get('admin/dokters', [App\Http\Controllers\AdminController::class, 'dokters'])->name('admin.dokters')->middleware('is_admin');
