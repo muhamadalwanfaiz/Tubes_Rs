@@ -44,7 +44,7 @@
                             <td>{{$pasien->alamat}}</td>
                             <td>{{$pasien->noHp}}</td>
                             <td>
-                                <button class="btn btn-success">Edit</button>
+                                <button type="button" id="btn-edit-pasien" class="btn btn-success" data-toggle="modal" data-target="#editPasienModal" data-id="{{ $pasien->id }}">Edit</button>
                                 <button class="btn btn-danger">Hapus</button>
                             </td>
                         </tr>
@@ -103,4 +103,84 @@
         </div>
     </div>
 </div>
+
+{{-- UPADATE DATA PASIEN --}}
+<div class="modal fade" id="editPasienModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Pasien</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('admin.pasien.update') }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="edit-kodePasien">Kode Pasien</label>
+                                <input type="text" class="form-control" name="kodePasien" id="edit-kodePasien" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-nama">Nama</label>
+                                <input type="text" class="form-control" name="nama" id="edit-nama" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-gender">Jenis Kelamin</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="gender" id="gender">
+                                    <option value="Laki-laki" {{ $pasien->gender == "Laki-laki" ? 'selected' : ''}}>Laki-Laki</option>
+                                    <option value="Perempuan" {{ $pasien->gender == "Perempuan" ? 'selected' : ''}}>Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-umur">Umur</label>
+                                <input type="text" class="form-control" name="umur" id="edit-umur" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-alamat">Alamat</label>
+                                <input type="text" class="form-control" name="alamat" id="edit-alamat" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-noHp">No Hanphone</label>
+                                <input type="text" class="form-control" name="noHp" id="edit-noHp" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" id="edit-id">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@section('js')
+    <script>
+        $(function(){
+            $(document).on('click','#btn-edit-pasien', function(){
+                let id = $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('/admin/ajaxadmin/dataPasien')}}/" + id,
+                    datatype: 'json',
+                    success: function(res){
+                        $('#edit-kodePasien').val(res.kodePasien);
+                        $('#edit-nama').val(res.nama);
+                        $('#edit-gender').val(res.gender);
+                        $('#edit-umur').val(res.umur);
+                        $('#edit-alamat').val(res.alamat);
+                        $('#edit-noHp').val(res.noHp);
+                        $('#edit-id').val(res.id);
+                    },
+                });
+            });
+        });
+    </script>
+@stop

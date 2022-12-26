@@ -14,6 +14,7 @@ class CreatePasiensTable extends Migration
     public function up()
     {
         Schema::create('pasiens', function (Blueprint $table) {
+            $table->id();
             $table->char('kodePasien', 5);
             $table->string('nama');
             $table->string('gender');
@@ -21,8 +22,6 @@ class CreatePasiensTable extends Migration
             $table->string('alamat');
             $table->char('noHp', 12);
             $table->timestamps();
-
-            $table->primary('kodePasien');
         });
     }
 

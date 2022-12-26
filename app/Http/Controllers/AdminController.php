@@ -70,6 +70,44 @@ class AdminController extends Controller
         return redirect()->route('admin.pasiens')->with($notification);
     }
 
+    // AJAX PROCESS
+    public function getDataPasien($id)
+    {
+        $pasien = Pasien::find($id);
+        return response()->json($pasien);
+    }
+
+    public function update_pasien(Request $req) 
+    {
+        $pasien = Pasien::find($req->get('id'));
+
+        $validate = $req->validate([
+            'kodePasien' => 'required',
+            'nama' => 'required',
+            'gender' => 'required',
+            'umur' => 'required',
+            'alamat' => 'required',
+            'noHp' => 'required'
+        ]);
+
+        $pasien->kodePasien = $req->get('kodePasien');
+        $pasien->nama = $req->get('nama');
+        $pasien->gender = $req->get('gender');
+        $pasien->umur = $req->get('umur');
+        $pasien->alamat = $req->get('alamat');
+        $pasien->noHp = $req->get('noHp');
+
+        $pasien->save();
+
+        $notification = array(
+            'message' => 'Data buku berhasil diubah',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.pasiens')->with($notification);
+
+    }
+
     // VIEW DATA DOKTER
     public function dokters()
     {
