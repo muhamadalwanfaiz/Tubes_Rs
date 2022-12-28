@@ -77,6 +77,7 @@ class AdminController extends Controller
         return response()->json($pasien);
     }
 
+    // UPADATE DATA PASIEN
     public function update_pasien(Request $req) 
     {
         $pasien = Pasien::find($req->get('id'));
@@ -106,6 +107,22 @@ class AdminController extends Controller
 
         return redirect()->route('admin.pasiens')->with($notification);
 
+    }
+
+    // DELETE DATA PASIEN
+    public function delete_pasien($id)
+    {
+        $pasien = Pasien::find($id);
+
+        $pasien->delete();
+
+        $success = true;
+        $message = "Data pasien berhasil dihapus";
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
     }
 
     // VIEW DATA DOKTER

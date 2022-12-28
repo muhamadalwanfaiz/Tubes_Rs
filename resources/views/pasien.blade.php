@@ -45,7 +45,7 @@
                             <td>{{$pasien->noHp}}</td>
                             <td>
                                 <button type="button" id="btn-edit-pasien" class="btn btn-success" data-toggle="modal" data-target="#editPasienModal" data-id="{{ $pasien->id }}">Edit</button>
-                                <button class="btn btn-danger">Hapus</button>
+                                <button type="button" id="btn-delete-pasien" class="btn btn-danger" onclick="deleteConfirmation('{{$pasien->id}}','{{$pasien->nama}}')">Hapus</button>
                             </td>
                         </tr>
                     @endforeach
@@ -131,8 +131,8 @@
                             <div class="form-group">
                                 <label for="edit-gender">Jenis Kelamin</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="gender" id="gender">
-                                    <option value="Laki-laki" {{ $pasien->gender == "Laki-laki" ? 'selected' : ''}}>Laki-Laki</option>
-                                    <option value="Perempuan" {{ $pasien->gender == "Perempuan" ? 'selected' : ''}}>Perempuan</option>
+                                    <option>Laki-Laki</option>
+                                    <option>Perempuan</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -163,6 +163,8 @@
 
 @section('js')
     <script>
+
+        // MENGAMBIL VALUE DARI PASIEN
         $(function(){
             $(document).on('click','#btn-edit-pasien', function(){
                 let id = $(this).data('id');
@@ -182,5 +184,44 @@
                 });
             });
         });
+
+        // FUNCTION DELETE PADA PASIEN 
+        function deleteConfirmation(npm, nama) {
+            swal.fire({
+                title: "Hapus",
+                type: 'warning',
+                text: "Apakah anda yakin akan menghapus data Pasien dengan Nama " + nama +"?!",
+                showCancelButton: !0,
+                confirmButtonText: "Ya lakukan",
+                cancelButtonText: "Tidak, batalkan!",
+                reverseButtons: !0
+            }).then(function (e) {
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "pasiens/delete/"+ npm,
+                        data: {_token: CSRF_TOKEN},
+                        datatype: 'JSON',
+                        success: function (results) {
+                            if (results.success === true) {
+                                swal.fire("Done!", results.message, "success");
+                                // REFRESH PAGE AFTER 2
+                                setTimeout(function(){
+                                    location.reload();
+                                },1000);
+                            } else {
+                                swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    });
+                } else {
+                    e.dismiss;
+                }
+            }, function (dismiss) {
+                return false;
+            })
+        }
     </script>
 @stop
