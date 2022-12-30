@@ -28,6 +28,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('admin/home', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
 
+
+// PASIEN
 Route::get('admin/pasiens', [App\Http\Controllers\AdminController::class, 'pasiens'])->name('admin.pasiens')->middleware('is_admin');
 
 Route::post('admin/pasien', [App\Http\Controllers\AdminController::class, 'submit_pasien'])->name('admin.pasien.submit')->middleware('is_admin');
@@ -37,5 +39,7 @@ Route::patch('admin/pasiens/update', [App\Http\Controllers\AdminController::clas
 Route::get('/admin/ajaxadmin/dataPasien/{id}', [App\Http\Controllers\AdminController::class, 'getDataPasien']);
 
 Route::post('admin/pasiens/delete/{id}', [App\Http\Controllers\AdminController::class, 'delete_pasien'])->name('admin.pasien.delete')->middleware('is_admin');
+
+Route::get('admin/pasiens/export', [\App\Http\Controllers\AdminController::class, 'export'])->name('admin.pasien.export')->middleware('is_admin');
 
 Route::get('admin/dokters', [App\Http\Controllers\AdminController::class, 'dokters'])->name('admin.dokters')->middleware('is_admin');

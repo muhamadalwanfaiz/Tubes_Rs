@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PasienExport;
 use App\Models\Pasien;
 use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -123,6 +125,12 @@ class AdminController extends Controller
             'success' => $success,
             'message' => $message,
         ]);
+    }
+
+    // EXPORT EXCEL DATA PASIEN
+    public function export()
+    {
+        return Excel::download(new PasienExport, 'pasien.xlsx');
     }
 
     // VIEW DATA DOKTER
