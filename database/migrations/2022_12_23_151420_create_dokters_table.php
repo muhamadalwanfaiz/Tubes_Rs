@@ -14,12 +14,10 @@ class CreateDoktersTable extends Migration
     public function up()
     {
         Schema::create('dokters', function (Blueprint $table) {
-            $table->char('kodeDokter', 5);
+            $table->id();
             $table->string('nama');
             $table->string('spesialis');
             $table->timestamps();
-            
-            $table->primary('kodeDokter');
         });
     }
 

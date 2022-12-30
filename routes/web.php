@@ -42,4 +42,9 @@ Route::post('admin/pasiens/delete/{id}', [App\Http\Controllers\AdminController::
 
 Route::get('admin/pasiens/export', [\App\Http\Controllers\AdminController::class, 'export'])->name('admin.pasien.export')->middleware('is_admin');
 
-Route::get('admin/dokters', [App\Http\Controllers\AdminController::class, 'dokters'])->name('admin.dokters')->middleware('is_admin');
+// DOKTER
+Route::get('admin/dokters', [App\Http\Controllers\AdminDokterController::class, 'dokters'])->name('admin.dokters')->middleware('is_admin');
+
+Route::patch('admin/dokters/update', [App\Http\Controllers\AdminDokterController::class, 'update_dokter'])->name('admin.dokter.update')->middleware('is_admin');
+
+Route::get('/admin/ajaxadmin/dataDokter/{id}', [App\Http\Controllers\AdminDokterController::class, 'getDataDokter']);

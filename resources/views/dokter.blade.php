@@ -31,7 +31,10 @@
                             <td>{{$no++}}</td>
                             <td>{{$dokter->nama}}</td>
                             <td>{{$dokter->spesialis}}</td>
-                            <td></td>
+                            <td>
+                                <button type="button" id="btn-edit-dokter" class="btn btn-success" data-toggle="modal" data-target="#editDokterModal" data-id="{{ $dokter->id }}">Edit</button>
+                                <button type="button" class="btn btn-danger">Hapus</button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -39,4 +42,64 @@
         </div>
     </div>
 </div>
+
+{{-- UPADATE DATA PASIEN --}}
+<div class="modal fade" id="editDokterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Dokter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('admin.dokter.update') }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="edit-nama">Nama</label>
+                                <input type="text" class="form-control" name="nama" id="edit-nama" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-spesialis">Spesialis</label>
+                                <input type="text" class="form-control" name="spesialis" id="edit-spesialis" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" id="edit-id">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@section('js')
+    <script>
+
+        // MENGAMBIL VALUE DARI PASIEN
+        $(function(){
+            $(document).on('click','#btn-edit-dokter', function(){
+                let id = $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('/admin/ajaxadmin/dataDokter')}}/" + id,
+                    datatype: 'json',
+                    success: function(res){
+                        $('#edit-nama').val(res.nama);
+                        $('#edit-spesialis').val(res.spesialis);
+                        $('#edit-id').val(res.id);
+                    },
+                });
+            });
+        });
+
+    </script>
+@stop

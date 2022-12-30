@@ -103,7 +103,7 @@ class AdminController extends Controller
         $pasien->save();
 
         $notification = array(
-            'message' => 'Data buku berhasil diubah',
+            'message' => 'Data pasien berhasil diubah',
             'alert-type' => 'success'
         );
 
@@ -131,14 +131,6 @@ class AdminController extends Controller
     public function export()
     {
         return Excel::download(new PasienExport, 'pasien.xlsx');
-    }
-
-    // VIEW DATA DOKTER
-    public function dokters()
-    {
-        $user = Auth::user();
-        $dokters = Dokter::all();
-        return view('dokter',compact('user','dokters'));
     }
 
 }
