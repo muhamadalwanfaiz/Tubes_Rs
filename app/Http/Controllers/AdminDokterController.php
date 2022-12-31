@@ -16,6 +16,27 @@ class AdminDokterController extends Controller
         return view('dokter',compact('user','dokters'));
     }
 
+    // TAMBAH DATA DOKTER
+    public function submit_dokter(Request $req)
+    {
+        $validate = $req->validate([
+            'nama' => 'required',
+            'spesialis' => 'required'
+        ]);
+
+        $dokter = new Dokter;
+        $dokter->nama = $req->get('nama');
+        $dokter->spesialis = $req->get('spesialis');
+
+        $dokter->save();
+        $notification = array(
+            'message' => 'Data pasien berhasil ditambahkan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.dokters')->with($notification);
+    }
+
     // AJAX PROCESS
     public function getDataDokter($id)
     {
@@ -44,6 +65,22 @@ class AdminDokterController extends Controller
         );
 
         return redirect()->route('admin.dokters')->with($notification);
-
     }
+
+    // DELETE DATA DOKTER
+    public function delete_dokter($id)
+    {
+        $dokter = Dokter::find($id);
+
+        $dokter->delete();
+
+        $success = true;
+        $message = "Data dokter berhasil dihapus";
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+    
 }
