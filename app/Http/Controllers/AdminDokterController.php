@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DokterExport;
 use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminDokterController extends Controller
 {
@@ -83,4 +85,9 @@ class AdminDokterController extends Controller
         ]);
     }
     
+    // EXPORT EXCEL DATA DOKTER
+    public function export()
+    {
+        return Excel::download(new DokterExport, 'dokter.xlsx');
+    }
 }

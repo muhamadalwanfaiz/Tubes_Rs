@@ -16,6 +16,7 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDokterModal">
                 <i class="fa fa-plus"></i>Tambah Data
             </button>
+            <a href="{{ route('admin.dokter.export') }}" class="btn btn-info"><i class="fa fa-file mx-1"></i>Export</a>
         <hr/>
             <table id="table-data" class="table table-bordered">
                 <thead>

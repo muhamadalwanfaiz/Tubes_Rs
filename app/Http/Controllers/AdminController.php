@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exports\PasienExport;
 use App\Models\Pasien;
-use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
