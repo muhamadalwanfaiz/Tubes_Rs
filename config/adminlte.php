@@ -330,6 +330,12 @@ return [
             'icon'        => 'fas fa-fw fa-user-md', 
             'can'         => 'isAdmin',
         ],
+        [
+            'text'        => 'Kunjungan',
+            'url'         => 'admin/kunjungans',
+            'icon'        => 'fas fa-fw fa-file', 
+            'can'         => 'isAdmin',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
