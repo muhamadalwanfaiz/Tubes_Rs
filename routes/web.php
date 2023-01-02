@@ -54,3 +54,14 @@ Route::get('/admin/ajaxadmin/dataDokter/{id}', [App\Http\Controllers\AdminDokter
 Route::post('admin/dokters/delete/{id}', [App\Http\Controllers\AdminDokterController::class, 'delete_dokter'])->name('admin.dokter.delete')->middleware('is_admin');
 
 Route::get('admin/dokters/export', [\App\Http\Controllers\AdminDokterController::class, 'export'])->name('admin.dokter.export')->middleware('is_admin');
+
+// KUNJUNGAN
+Route::get('admin/kunjungans', [App\Http\Controllers\AdminKunjunganController::class, 'kunjungans'])->name('admin.kunjungans')->middleware('is_admin');
+
+Route::post('admin/kunjungan', [App\Http\Controllers\AdminKunjunganController::class, 'submit_kunjungan'])->name('admin.kunjungan.submit')->middleware('is_admin');
+
+Route::patch('admin/kunjungans/update', [App\Http\Controllers\AdminKunjunganController::class, 'update_kunjungan'])->name('admin.kunjungan.update')->middleware('is_admin');
+
+Route::get('/admin/ajaxadmin/dataKunjungan/{id}', [App\Http\Controllers\AdminKunjunganController::class, 'getDataKunjungan']);
+
+Route::post('admin/kunjungans/delete/{id}', [App\Http\Controllers\AdminKunjunganController::class, 'delete_kunjungan'])->name('admin.kunjungan.delete')->middleware('is_admin');
