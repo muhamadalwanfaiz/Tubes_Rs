@@ -336,6 +336,12 @@ return [
             'icon'        => 'fas fa-fw fa-file', 
             'can'         => 'isAdmin',
         ],
+        [
+            'text'        => 'Pembayaran',
+            'url'         => 'admin/pembayarans',
+            'icon'        => 'fas fa-fw fa-money-check', 
+            'can'         => 'isAdmin',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

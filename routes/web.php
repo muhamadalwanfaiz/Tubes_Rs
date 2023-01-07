@@ -65,3 +65,14 @@ Route::patch('admin/kunjungans/update', [App\Http\Controllers\AdminKunjunganCont
 Route::get('/admin/ajaxadmin/dataKunjungan/{id}', [App\Http\Controllers\AdminKunjunganController::class, 'getDataKunjungan']);
 
 Route::post('admin/kunjungans/delete/{id}', [App\Http\Controllers\AdminKunjunganController::class, 'delete_kunjungan'])->name('admin.kunjungan.delete')->middleware('is_admin');
+
+// PEMBAYARAN
+Route::get('admin/pembayarans', [App\Http\Controllers\AdminPembayaranController::class, 'pembayarans'])->name('admin.pembayarans')->middleware('is_admin');
+
+Route::post('admin/pembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'submit_pembayaran'])->name('admin.pembayaran.submit')->middleware('is_admin');
+
+Route::patch('admin/pembayarans/update', [App\Http\Controllers\AdminPembayaranController::class, 'update_pembayaran'])->name('admin.pembayaran.update')->middleware('is_admin');
+
+Route::get('/admin/ajaxadmin/dataPembayaran/{id}', [App\Http\Controllers\AdminPembayaranController::class, 'getDataPembayaran']);
+
+Route::post('admin/pembayarans/delete/{id}', [App\Http\Controllers\AdminPembayaranController::class, 'delete_pembayaran'])->name('admin.pembayaran.delete')->middleware('is_admin');
