@@ -18,13 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//login otentikasi
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('user/home', [App\Http\Controllers\UserController::class, 'index'])->name('user.home')->middleware('is_user');
 
 Route::get('admin/home', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
 
