@@ -73,3 +73,10 @@ Route::patch('admin/pembayarans/update', [App\Http\Controllers\AdminPembayaranCo
 Route::get('/admin/ajaxadmin/dataPembayaran/{id}', [App\Http\Controllers\AdminPembayaranController::class, 'getDataPembayaran']);
 
 Route::post('admin/pembayarans/delete/{id}', [App\Http\Controllers\AdminPembayaranController::class, 'delete_pembayaran'])->name('admin.pembayaran.delete')->middleware('is_admin');
+
+/* USER ROUTE! */
+
+// USER DATA DIRI
+Route::get('user/datadiris', [App\Http\Controllers\UserController::class, 'datadiris'])->name('user.datadiris')->middleware('is_user');
+
+Route::post('user/datadiri', [App\Http\Controllers\UserController::class, 'submit_datadiri'])->name('user.datadiri.submit')->middleware('is_user');

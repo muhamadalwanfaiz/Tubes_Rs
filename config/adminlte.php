@@ -318,6 +318,22 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+
+        //USER PAGES
+        [
+            'text'        => 'Data Diri',
+            'url'         => 'user/datadiris',
+            'icon'        => 'fas fa-fw fa-users',
+            'can'         => 'isUser',
+        ],
+        [
+            'text'        => 'Pendaftaran',
+            'url'         => 'user/pendaftarans',
+            'icon'        => 'fas fa-fw fa-scroll',
+            'can'         => 'isUser',
+        ],
+
+        //ADMIN PAGES
         [
             'text'        => 'Pasien',
             'url'         => 'admin/pasiens',
