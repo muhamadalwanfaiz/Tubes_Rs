@@ -8,6 +8,10 @@ use App\Models\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Excel;
+use App\Exports\KunjungansExport;
+
+
 
 class AdminKunjunganController extends Controller
 {
@@ -90,4 +94,8 @@ class AdminKunjunganController extends Controller
         ]);
     }
 
+    public function export()
+    {
+        return Excel::download(new KunjungansExport, 'kunjungans.xlsx');
+    }
 }
