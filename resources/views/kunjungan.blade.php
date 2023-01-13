@@ -52,6 +52,7 @@
                             <td>{{$kunjungan->relationToDokter->spesialis}}</td>
                             <td>{{$kunjungan->keterangan}}</td>
                             <td>
+                                <a href="{{ route('admin.kunjungan.pdf', $kunjungan->id) }}" class="btn btn-warning" target="_blank">Cetak</a>
                                 <button type="button" id="btn-edit-kunjungan" class="btn btn-success" data-toggle="modal" data-target="#editKunjunganModal" data-id="{{ $kunjungan->id }}">Edit</button>
                                 <button type="button" id="btn-delete-kunjungan" class="btn btn-danger" onclick="deleteConfirmation('{{ $kunjungan->id }}' , '{{ $kunjungan->relationToPasien->kodePasien }}')">Hapus</button>
                             </td>

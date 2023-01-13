@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Excel;
+use PDF;
 use App\Exports\KunjungansExport;
 
 
@@ -97,5 +98,12 @@ class AdminKunjunganController extends Controller
     public function export()
     {
         return Excel::download(new KunjungansExport, 'kunjungans.xlsx');
+    }
+
+    public function pdf_kunjungan($id)
+    {
+        $kunjungans = Kunjungan::find($id);
+        $pdf = PDF::loadView('pdfKunjungan', ['kunjungans' => $kunjungans]);
+        return $pdf->download('data-kunjungan.pdf');
     }
 }
