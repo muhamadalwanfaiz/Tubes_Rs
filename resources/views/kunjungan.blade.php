@@ -16,6 +16,8 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahKunjunganModal">
                 <i class="fa fa-plus mx-2"></i>Tambah Data
             </button>
+            <a href="{{ route('admin.kunjungan.export') }}" class="btn btn-info" target="_blank">
+                <i class="fa fa-file mx-1"></i>Export</a>
             <hr>
             <table id="table-data" class="table table-bordered">
                 <thead>
