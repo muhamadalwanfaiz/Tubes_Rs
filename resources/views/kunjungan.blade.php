@@ -16,6 +16,8 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahKunjunganModal">
                 <i class="fa fa-plus mx-2"></i>Tambah Data
             </button>
+            <a href="{{ route('admin.kunjungan.export') }}" class="btn btn-info" target="_blank">
+                <i class="fa fa-file mx-1"></i>Export</a>
             <hr>
             <table id="table-data" class="table table-bordered">
                 <thead>
@@ -50,6 +52,7 @@
                             <td>{{$kunjungan->relationToDokter->spesialis}}</td>
                             <td>{{$kunjungan->keterangan}}</td>
                             <td>
+                                <a href="{{ route('admin.kunjungan.pdf', $kunjungan->id) }}" class="btn btn-warning" target="_blank">Cetak</a>
                                 <button type="button" id="btn-edit-kunjungan" class="btn btn-success" data-toggle="modal" data-target="#editKunjunganModal" data-id="{{ $kunjungan->id }}">Edit</button>
                                 <button type="button" id="btn-delete-kunjungan" class="btn btn-danger" onclick="deleteConfirmation('{{ $kunjungan->id }}' , '{{ $kunjungan->relationToPasien->kodePasien }}')">Hapus</button>
                             </td>

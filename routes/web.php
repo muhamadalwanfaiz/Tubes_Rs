@@ -65,6 +65,10 @@ Route::get('/admin/ajaxadmin/dataKunjungan/{id}', [App\Http\Controllers\AdminKun
 
 Route::post('admin/kunjungans/delete/{id}', [App\Http\Controllers\AdminKunjunganController::class, 'delete_kunjungan'])->name('admin.kunjungan.delete')->middleware('is_admin');
 
+Route::get('admin/kunjungans/export', [App\Http\Controllers\AdminKunjunganController::class, 'export'])->name('admin.kunjungan.export')->middleware('is_admin');
+
+Route::get('admin/kunjungans/pdf/{id}', [App\Http\Controllers\AdminKunjunganController::class, 'pdf_kunjungan'])->name('admin.kunjungan.pdf')->middleware('is_admin');
+
 // PEMBAYARAN
 Route::get('admin/pembayarans', [App\Http\Controllers\AdminPembayaranController::class, 'pembayarans'])->name('admin.pembayarans')->middleware('is_admin');
 

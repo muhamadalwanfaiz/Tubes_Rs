@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kunjungan extends Model
 {
-    // use HasFactory;
+    use HasFactory;
+    protected $fillable = ['pasiens_id','dokters_id','kunjungan'];
 
     public function relationToDokter()
     {
