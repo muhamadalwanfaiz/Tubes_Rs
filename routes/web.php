@@ -21,6 +21,8 @@ Route::get('/', function () {
 //login otentikasi
 Auth::routes();
 
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('user/home', [App\Http\Controllers\UserController::class, 'index'])->name('user.home')->middleware('is_user');
 
 Route::get('admin/home', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
@@ -80,3 +82,10 @@ Route::post('admin/pembayarans/delete/{id}', [App\Http\Controllers\AdminPembayar
 Route::get('user/datadiris', [App\Http\Controllers\UserController::class, 'datadiris'])->name('user.datadiris')->middleware('is_user');
 
 Route::post('user/datadiri', [App\Http\Controllers\UserController::class, 'submit_datadiri'])->name('user.datadiri.submit')->middleware('is_user');
+
+// USER PENDAFTARAN
+Route::get('user/pendaftarans', [App\Http\Controllers\UserController::class, 'pendaftarans'])->name('user.pendaftarans')->middleware('is_user');
+
+Route::get('user/ajaxuser/pendaftaran/{$id}', [App\Http\Controllers\UserController::class, 'getPasienPendaftaran']);
+
+Route::post('user/pendaftaran', [App\Http\Controllers\UserController::class, 'submit_pendaftaran'])->name('user.pendaftaran.submit')->middleware('is_user');
