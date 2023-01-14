@@ -80,3 +80,7 @@ Route::patch('admin/pembayarans/update', [App\Http\Controllers\AdminPembayaranCo
 Route::get('/admin/ajaxadmin/dataPembayaran/{id}', [App\Http\Controllers\AdminPembayaranController::class, 'getDataPembayaran']);
 
 Route::post('admin/pembayarans/delete/{id}', [App\Http\Controllers\AdminPembayaranController::class, 'delete_pembayaran'])->name('admin.pembayaran.delete')->middleware('is_admin');
+
+Route::get('admin/pembayarans/export', [App\Http\Controllers\AdminPembayaranController::class, 'export'])->name('admin.pembayaran.export')->middleware('is_admin');
+
+Route::get('admin/kunjungans/pdf', [App\Http\Controllers\AdminPembayaranController::class, 'pdf_pembayaran'])->name('admin.pembayaran.pdf')->middleware('is_admin');
