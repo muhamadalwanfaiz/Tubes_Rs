@@ -16,6 +16,11 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahPembayaranModal">
                 <i class="fa fa-plus"></i>Tambah Data
             </button>
+            <a href="{{ route('admin.pembayaran.export') }}" class="btn btn-info" target="_blank">
+                <i class="fa fa-file mx-1"></i>Export</a>
+            <a href="{{ route('admin.pembayaran.pdf') }}" class="btn btn-secondary">
+                <i class="fa fa-print mx-1"></i>Cetak PDF
+            </a>
         <hr/>
             <table id="table-data" class="table table-bordered">
                 <thead>
