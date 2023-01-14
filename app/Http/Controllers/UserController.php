@@ -83,11 +83,12 @@ class UserController extends Controller
     {
         $pasiens = Pasien::all();
         $dokters = Dokter::all();
+        $kodepasiens = Pasien::orderBy('id','desc')->first();
 
         $user = Auth::user();
         $pendaftarans = Kunjungan::all();
 
-        return view('pendaftaranUser',compact('user','pendaftarans','pasiens','dokters'));
+        return view('pendaftaranUser',compact('user','pendaftarans','pasiens','dokters','kodepasiens'));
     }
 
     // AJAX PROCESS
@@ -100,9 +101,6 @@ class UserController extends Controller
     // ADD PENDAFTARAN
     public function submit_pendaftaran(Request $req)
     {
-        $pasien = Pasien::find($req->get('id'))->last();
-        $dokter = Dokter::all();
-
         $validate = $req->validate([
             'pasiens_id' => 'required',
             'dokters_id' => 'required',

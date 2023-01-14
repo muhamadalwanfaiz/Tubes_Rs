@@ -18,16 +18,12 @@
                     @csrf
                     <div class="form-group">
                         <label for="kodePasien">Kode Pasien</label>
-                        <input type="text" class="form-control" name="kodePasien" id="kodePasien" value="{{ $pendaftarans }}" readonly>
+                        <input type="text" class="form-control" name="kodePasien" id="kodePasien" value="{{ $kodepasiens->kodePasien }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="pasiens_id">Nama Pasien</label>
-                        <select name="pasiens_id" class="form-control" id="pasiens_id">
-                            <option value="" hidden></option>
-                            {{-- @foreach($pasiens as $key => $value)
-                                <option value="{{ $value->id }}">{{ $value->nama }}</option>
-                            @endforeach --}}
-                        </select>
+                        <input type="text" class="form-control" value="{{ $kodepasiens->nama }}" readonly>
+                        <input type="hidden" class="form-control" name="pasiens_id" id="pasiens_id" value="{{ $kodepasiens->id }}">
                     </div>
                     <div class="form-group">
                         <label for="dokters_id">Spesialis</label>
