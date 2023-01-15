@@ -80,6 +80,12 @@ Route::get('/admin/ajaxadmin/dataPembayaran/{id}', [App\Http\Controllers\AdminPe
 
 Route::post('admin/pembayarans/delete/{id}', [App\Http\Controllers\AdminPembayaranController::class, 'delete_pembayaran'])->name('admin.pembayaran.delete')->middleware('is_admin');
 
+Route::get('admin/pembayarans/export', [App\Http\Controllers\AdminPembayaranController::class, 'export'])->name('admin.pembayaran.export')->middleware('is_admin');
+
+Route::get('admin/kunjungans/pdf', [App\Http\Controllers\AdminPembayaranController::class, 'pdf_pembayaran'])->name('admin.pembayaran.pdf')->middleware('is_admin');
+
+
+
 /* USER ROUTE! */
 
 // USER DATA DIRI
@@ -93,3 +99,5 @@ Route::get('user/pendaftarans', [App\Http\Controllers\UserController::class, 'pe
 Route::get('user/ajaxuser/pendaftaran/{$id}', [App\Http\Controllers\UserController::class, 'getPasienPendaftaran']);
 
 Route::post('user/pendaftaran', [App\Http\Controllers\UserController::class, 'submit_pendaftaran'])->name('user.pendaftaran.submit')->middleware('is_user');
+
+

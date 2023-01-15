@@ -44,37 +44,8 @@
                             <input type="text" class="form-control" name="noHp" id="noHp" required>
                         </div>
                             <button type="submit" class="btn btn-success">Kirim</button>
-                            <button type="button" class="btn btn-primary" id="btn-submit-pendaftaran" data-toggle="modal" data-target="#tambahPendaftaranModal" >
-                                <i class="fa fa-plus mx-2"></i>Daftar Periksa
-                            </button>
                     </form>
                 </div>
-                <hr/>
-            <table id="table-data" class="table table-bordered">
-                <thead>
-                    <tr class="text-center">
-                        <th>NO</th>
-                        <th>Kode Pasien</th>
-                        <th>Nama Pasien</th>
-                        <th>Spesialis</th>
-                        <th>Keterangan</th>  
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $no=1;
-                    @endphp
-                    @foreach($kunjungans as $kunjungan)
-                        <tr>
-                            <td>{{$no++}}</td>
-                            <td>{{$kunjungan->relationToPasien->kodePasien}}</td>
-                            <td>{{$kunjungan->relationToPasien->nama}}</td>
-                            <td>{{$kunjungan->relationToDokter->spesialis}}</td>
-                            <td>{{$kunjungan->keterangan}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PembayaranExport;
 use App\Models\Kunjungan;
 use App\Models\Pasien;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use Excel;
+use PDF;
 
 class AdminPembayaranController extends Controller
 {
@@ -97,5 +101,17 @@ class AdminPembayaranController extends Controller
             'success' => $success,
             'message' => $message,
         ]);
+    }
+    
+    public function export()
+    {
+        return Excel::download(new PembayaranExport, 'Pembayarans.xlsx');
+    }
+
+    public function pdf_pembayaran()
+    {
+        $pembayarans = Pembayaran::all();
+        $pdf = PDF::loadView('pdfAllPembayaran',['pembayarans' => $pembayarans] );
+        return $pdf->download('data-pemabayarans.pdf');
     }
 }

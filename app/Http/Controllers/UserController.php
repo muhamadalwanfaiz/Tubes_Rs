@@ -73,7 +73,7 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('user.datadiris')->with($notification);
+        return redirect()->route('user.pendaftarans')->with($notification);
     }
 
     /* 
