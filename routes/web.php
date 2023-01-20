@@ -100,4 +100,15 @@ Route::get('user/ajaxuser/pendaftaran/{$id}', [App\Http\Controllers\UserControll
 
 Route::post('user/pendaftaran', [App\Http\Controllers\UserController::class, 'submit_pendaftaran'])->name('user.pendaftaran.submit')->middleware('is_user');
 
+// USER PEMBAYARAN
+Route::get('user/pembayarans', [App\Http\Controllers\UserController::class, 'pembayarans'])->name('user.pembayarans')->middleware('is_user');
 
+Route::post('user/pembayaran', [App\Http\Controllers\UserController::class, 'submit_pembayaran'])->name('user.pembayaran.submit')->middleware('is_user');
+
+
+/* 
+Email
+ */
+
+ // MENCOBA KIRIM EMAIL
+Route::get('/sendemail', [App\Http\Controllers\EmailController::class, 'kirim']);

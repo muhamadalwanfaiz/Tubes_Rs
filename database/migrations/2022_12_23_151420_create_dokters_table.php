@@ -17,6 +17,7 @@ class CreateDoktersTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('spesialis');
+            $table->integer('harga');
             $table->timestamps();
         });
     }

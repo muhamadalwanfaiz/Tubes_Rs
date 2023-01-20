@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use App\Models\Pasien;
 use App\Models\Dokter;
 use App\Models\Kunjungan;
+use App\Models\Pembayaran;
+use App\Models\User;
+use App\Mail\SendingEmail;
+use Illuminate\Support\Facades\Mail;
+use App\Notifications\Informasi;
 
 class UserController extends Controller
 {
@@ -21,6 +28,7 @@ class UserController extends Controller
         $user = Auth::user();
         return view('home', compact('user'));
     }
+
 
     /* 
     // VIEW DATA DIRI 
@@ -76,6 +84,7 @@ class UserController extends Controller
         return redirect()->route('user.pendaftarans')->with($notification);
     }
 
+
     /* 
     // VIEW PENDAFTARAN 
     */
@@ -89,13 +98,6 @@ class UserController extends Controller
         $pendaftarans = Kunjungan::all();
 
         return view('pendaftaranUser',compact('user','pendaftarans','pasiens','dokters','kodepasiens'));
-    }
-
-    // AJAX PROCESS
-    public function getPasienPendaftaran($id)
-    {
-        $pasien = Pasien::find($id);
-        return response()->json($pasien);
     }
 
     // ADD PENDAFTARAN
@@ -118,6 +120,66 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('user.datadiris')->with($notification);
+        return redirect()->route('user.pembayarans')->with($notification);
+    }
+
+
+    /*
+    // VIEW PEMBAYARAN 
+    */
+    public function pembayarans()
+    {
+        $pasiens = Pasien::all();
+        $dokters = Dokter::all();
+        $kodepasiens = Pasien::orderBy('id','desc')->first();
+        $idkunjungan = Kunjungan::orderBy('id','desc')->first();
+        $idpembayaran = Pembayaran::orderBy('id','desc')->first();
+
+        $user = Auth::user();
+        $pendaftarans = Kunjungan::all();
+
+        return view('pembayaranUser',compact('user','pendaftarans','pasiens','dokters','kodepasiens', 'idpembayaran', 'idkunjungan'));
+    }
+
+    // ADD PEMBAYARAN
+    public function submit_pembayaran(Request $req)
+    {
+        $validate = $req->validate([
+            'kunjungans_id' => 'required',
+            'noRek' => 'required',
+            'jmlPembayaran' => 'required',
+            'buktiPembayaran' => 'required',
+        ]);
+
+        $pembayaran = new Pembayaran;
+        $pembayaran->kunjungans_id = $req->get('kunjungans_id');
+        $pembayaran->noRek = $req->get('noRek');
+        $pembayaran->jmlPembayaran = $req->get('jmlPembayaran');
+        if($req->hasFile('buktiPembayaran')){
+            $extension = $req->file('buktiPembayaran')->extension();
+
+            $filename = 'bkt_bayar'.time().'.'. $extension;
+
+            $req->file('buktiPembayaran')->storeAs('public/bkt_bayar', $filename);
+
+            $pembayaran->buktiPembayaran = $filename;
+        }
+
+        $pembayaran->save();
+        $notification = array(
+            'message' => 'Data pembayaran berhasil ditambahkan',
+            'alert-type' => 'success'
+        );
+
+        $user = User::orderBy('id','desc')->first();
+        $data = [
+            'line1' => 'Terimakasih Telah melakukan Pendaftaran Mohon Di tunggu Untuk Pemeriksaanya',
+            'action' => 'Ok',
+            'line2' => 'Terima Kasih,'
+        ];
+
+        $user->notify(new Informasi($data));
+
+        return redirect()->route('user.pembayarans')->with($notification);
     }
 }

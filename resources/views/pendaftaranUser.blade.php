@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Home Page')
+@section('title', 'RS sehat')
 
 @section('content_header')
     <h1>Form Pendaftaran</h1>
@@ -26,7 +26,7 @@
                         <input type="hidden" class="form-control" name="pasiens_id" id="pasiens_id" value="{{ $kodepasiens->id }}">
                     </div>
                     <div class="form-group">
-                        <label for="dokters_id">Spesialis</label>
+                        <label for="dokters_id">Kontrol Spesialis</label>
                         <select name="dokters_id" class="form-control" id="dokters_id">
                             <option value="" hidden></option>
                             @foreach($dokters as $key => $value)
@@ -35,7 +35,7 @@
                             </select>
                     </div>
                     <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
+                        <label for="keterangan">Keluhan</label>
                         <textarea name="keterangan" id="keterangan" rows="5" class="form-control"></textarea>
                     </div>
                     </div>
