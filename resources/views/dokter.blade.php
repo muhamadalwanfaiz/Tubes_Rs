@@ -24,6 +24,7 @@
                         <th>NO</th>
                         <th>NAMA</th>
                         <th>SPESIALIS</th>
+                        <th>HARGA PERIKSA</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@
                             <td>{{$no++}}</td>
                             <td>{{$dokter->nama}}</td>
                             <td>{{$dokter->spesialis}}</td>
+                            <td>{{$dokter->harga}}</td>
                             <td>
                                 <button type="button" id="btn-edit-dokter" class="btn btn-success" data-toggle="modal" data-target="#editDokterModal" data-id="{{ $dokter->id }}">Edit</button>
                                 <button type="button" id="btn-delete-dokter" class="btn btn-danger" onclick="deleteConfirmation('{{$dokter->id}}','{{$dokter->nama}}')">Hapus</button>
@@ -68,6 +70,10 @@
                         <div class="form-group">
                             <label for="spesialis">Spesialis</label>
                             <input type="text" class="form-control" name="spesialis" id="spesialis" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="harga">Harga Periksa</label>
+                            <input type="text" class="form-control" name="harga" id="harga" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -103,6 +109,10 @@
                                 <label for="edit-spesialis">Spesialis</label>
                                 <input type="text" class="form-control" name="spesialis" id="edit-spesialis" required>
                             </div>
+                            <div class="form-group">
+                                <label for="edit-harga">Harga Periksa</label>
+                                <input type="text" class="form-control" name="harga" id="edit-harga" required>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -131,6 +141,7 @@
                     success: function(res){
                         $('#edit-nama').val(res.nama);
                         $('#edit-spesialis').val(res.spesialis);
+                        $('#edit-harga').val(res.harga)
                         $('#edit-id').val(res.id);
                     },
                 });

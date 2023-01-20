@@ -33,6 +33,8 @@
                         <th>SPESIALIS DOKTER</th>
                         <th>NO REKENING</th>
                         <th>JUMLAH PEMBAYARAN</th>
+                        <th>BUKTI PEMBAYARAN</th>
+                        <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -50,6 +52,14 @@
                             <td>{{$pembayaran->relationToKunjungan->relationToDokter->spesialis}}</td>
                             <td>{{$pembayaran->noRek}}</td>
                             <td>{{$pembayaran->jmlPembayaran}}</td>
+                            <td>
+                                @if($pembayaran->buktiPembayaran !== null)
+                                    <img src="{{asset('storage/bkt_bayar/'.$pembayaran->buktiPembayaran)}}" width="100px">
+                                @else
+                                        [Gambar Tidak Tersedia]
+                                @endif
+                            </td>
+                            <td>{{$pembayaran->status}}</td>
                             <td>
                                 <button type="button" id="btn-edit-pembayaran" class="btn btn-success" data-toggle="modal" data-target="#editPembayaranModal" data-id="{{ $pembayaran->id }}">Edit</button>
                                 <button type="button" id="btn-delete-dokter" class="btn btn-danger" onclick="deleteConfirmation('{{ $pembayaran->id }}' , '{{ $pembayaran->relationToKunjungan->relationToPasien->nama }}' , '{{ $pembayaran->noRek }}')">Hapus</button>
@@ -92,6 +102,14 @@
                             <label for="jmlPembayaran">Jumlah Pembayaran</label>
                             <input type="text" class="form-control" name="jmlPembayaran" id="jmlPembayaran" required>
                         </div>
+                        <div class="form-group">
+                            <label for="buktiPembayaran">Bukti Pembayaran</label>
+                             <input type="file"class="form-control h-auto" name="buktiPembayaran" id="buktiPembayaran" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                             <input type="text" class="form-control" name="status" id="status">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -127,10 +145,19 @@
                                 <label for="edit-jmlPembayaran">Jumlah Pembayaran</label>
                                 <input type="text" class="form-control" name="jmlPembayaran" id="edit-jmlPembayaran" required>
                             </div>
+                            <div class="form-group">
+                                <label for="buktiPembayaran">Bukti Pembayaran</label>
+                                 <input type="file"class="form-control h-auto" name="buktiPembayaran" id="edit-buktiPembayaran">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-status">Status</label>
+                                 <input type="text" class="form-control" name="status" id="edit-status" required>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" id="edit-id">
+                        <input type="hidden" name="old_buktiPembayaran" id="edit-old-buktiPembayaran">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-success">Update</button>
                     </div>
@@ -154,7 +181,9 @@
                     success: function(res){
                         $('#edit-noRek').val(res.noRek);
                         $('#edit-jmlPembayaran').val(res.jmlPembayaran);
+                        $('#edit-status').val(res.status)
                         $('#edit-id').val(res.id);
+                        $('#edit-old-buktiPembayaran').val(res.buktiPembayaran);
                     },
                 });
             });

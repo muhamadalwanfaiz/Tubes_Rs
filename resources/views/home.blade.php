@@ -11,13 +11,13 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Welcome') }}</div>
 
                 <div class="card-body">
                     @if ($user->roles_id == 1)
-                        Anda Login Sebagai Admin
+                        Hai, Selamat Datang Admin Selamat Bekerja
                     @else
-                        Anda Login Sebagai User
+                        Hai, Selamat Datang di Website Klinik Sehat
                     @endif
                 </div>
             </div>

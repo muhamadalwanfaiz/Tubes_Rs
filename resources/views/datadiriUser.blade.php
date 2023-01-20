@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label for="noHp">No. handphone</label>
                             <input type="text" class="form-control" name="noHp" id="noHp" required>
-                        </div>
+                        </div class="modal-footer">
                             <button type="submit" class="btn btn-success">Kirim</button>
                     </form>
                 </div>
@@ -51,51 +51,6 @@
     </div>
 </div>
 
-{{-- TAMBAH DATA PENDAFTARAN --}}
-<div class="modal fade" id="tambahPendaftaranModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-scroll mx-2"></i>Form Pendaftaran</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button> 
-            </div>
-            <div class="modal-body">
-                <p>Harap isi data diri terlebih dahulu sebelum melakukan pendaftaran!</p>
-                <hr>
-                <form method="post" action="{{ route ('user.pendaftaran.submit') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="submit-kodePasien">Kode Pasien</label>
-                        <input type="text" class="form-control" name="kodePasien" id="submit-kodePasien" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="submit-nama">Nama Pasien</label>
-                        <input type="text" class="form-control" name="namaPasien" id="submit-nama" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="dokters_id">Spesialis</label>
-                        <select name="dokters_id" class="form-control" id="dokters_id">
-                            <option value="" hidden></option>
-                            @foreach($dokters as $key => $value)
-                                <option value="{{ $value->id }}">{{ $value->spesialis }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea name="keterangan" id="keterangan" rows="5" class="form-control"></textarea>
-                    </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Kirim</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 @stop
 
 @section('js')

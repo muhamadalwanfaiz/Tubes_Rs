@@ -18,6 +18,8 @@ class CreatePembayaransTable extends Migration
             $table->foreignId('kunjungans_id')->constrained();
             $table->string('noRek');
             $table->integer('jmlPembayaran');
+            $table->string('buktiPembayaran');
+            $table->string('status');
             $table->timestamps();
         });
     }
