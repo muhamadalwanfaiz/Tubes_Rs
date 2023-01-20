@@ -29,6 +29,7 @@ class AdminDokterController extends Controller
         $dokter = new Dokter;
         $dokter->nama = $req->get('nama');
         $dokter->spesialis = $req->get('spesialis');
+        $dokter->harga = $req->get('harga');
 
         $dokter->save();
         $notification = array(
@@ -58,6 +59,7 @@ class AdminDokterController extends Controller
 
         $dokter->nama = $req->get('nama');
         $dokter->spesialis = $req->get('spesialis');
+        $dokter->harga = $req->get('harga');
 
         $dokter->save();
 

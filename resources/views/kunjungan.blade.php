@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Home Page')
+@section('title', 'RS sehat')
 
 @section('content_header')
     <h1>Data Kunjungan</h1>
@@ -31,6 +31,7 @@
                         <th>NO HANPHONE</th>
                         <th>NAMA DOKTER</th>
                         <th>SPESIALIS</th>
+                        <th>HARGA PERIKSA</th>
                         <th>KETERANGAN</th>
                         <th>AKSI</th>
                     </tr>
@@ -50,6 +51,7 @@
                             <td>{{$kunjungan->relationToPasien->noHp}}</td>
                             <td>{{$kunjungan->relationToDokter->nama}}</td>
                             <td>{{$kunjungan->relationToDokter->spesialis}}</td>
+                            <td>{{$kunjungan->relationToDokter->harga}}</td>
                             <td>{{$kunjungan->keterangan}}</td>
                             <td>
                                 <a href="{{ route('admin.kunjungan.pdf', $kunjungan->id) }}" class="btn btn-warning" target="_blank">Cetak</a>

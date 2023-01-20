@@ -8,6 +8,7 @@ use App\Models\Pasien;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use Excel;
 use PDF;
@@ -41,12 +42,23 @@ class AdminPembayaranController extends Controller
             'kunjungans_id' => 'required',
             'noRek' => 'required',
             'jmlPembayaran' => 'required',
+            'buktiPembayaran' => 'required',
         ]);
 
         $pembayaran = new Pembayaran;
         $pembayaran->kunjungans_id = $req->get('kunjungans_id');
         $pembayaran->noRek = $req->get('noRek');
         $pembayaran->jmlPembayaran = $req->get('jmlPembayaran');
+        if($req->hasFile('buktiPembayaran')){
+            $extension = $req->file('buktiPembayaran')->extension();
+
+            $filename = 'bkt_bayar'.time().'.'. $extension;
+
+            $req->file('buktiPembayaran')->storeAs('public/bkt_bayar', $filename);
+
+            $pembayaran->buktiPembayaran = $filename;
+        }
+        $pembayaran->status = $req->get('status');
 
         $pembayaran->save();
         $notification = array(
@@ -72,10 +84,20 @@ class AdminPembayaranController extends Controller
         $validate = $req->validate([
             'noRek' => 'required',
             'jmlPembayaran' => 'required',
+            'status' => 'required',
         ]);
 
         $pembayaran->noRek = $req->get('noRek');
         $pembayaran->jmlPembayaran = $req->get('jmlPembayaran');
+        if ($req->hasFile('buktiPembayaran')) {
+            $extension = $req->file('buktiPembayaran')->extension(); 
+            $filename = 'bkt_bayar_'.time().'.'.$extension;
+            $req->file('buktiPembayaran')->storeAs('public/bkt_bayar', $filename ); 
+            
+            Storage::delete('public/bkt_bayar/'.$req->get('old_buktiPembayaran')); 
+            $pembayaran->buktiPembayaran = $filename; 
+        }
+        $pembayaran->status = $req->get('status');
 
         $pembayaran->save();
 
