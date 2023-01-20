@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Home Page')
+@section('title', 'RS sehat')
 
 @section('content_header')
     <h1>Data Kunjungan</h1>

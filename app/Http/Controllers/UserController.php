@@ -171,11 +171,6 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
 
-        /* $text = [
-            'subject' => 'RS sehat'
-        ];
-        Mail::to('user@gmail.com')->send(new SendingEmail($text)); */
-
         $user = User::orderBy('id','desc')->first();
         $data = [
             'line1' => 'Terimakasih Telah melakukan Pendaftaran Mohon Di tunggu Untuk Pemeriksaanya',
